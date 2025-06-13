@@ -1,4 +1,5 @@
 import telebot
+from time import sleep
 
 # Bot Token
 TOKEN = '7709651915:AAHCE44EvhectlJs-tdr6SJXgZgy7MOCGjI'
@@ -12,7 +13,7 @@ def handle_numbers(message):
         formatted_links = []
 
         for line in lines:
-            # Clean the number (remove spaces and any existing +)
+            # Clean the number
             number = line.strip().replace(" ", "").replace("+", "")
             
             # Create clickable link
@@ -27,5 +28,10 @@ def handle_numbers(message):
     except Exception as e:
         bot.reply_to(message, "Try again!")
 
-print("Bot started...")
-bot.polling()
+while True:
+    try:
+        print("Bot started...")
+        bot.polling(none_stop=True)
+    except Exception as e:
+        print(e)
+        sleep(3)
